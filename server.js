@@ -4,27 +4,27 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const _ = require('lodash');
+var helmet = require('helmet')
 
 const app = express();
+
+// TODO: Query database for inserted file
 
 app.use(fileUpload({
     createParentPath: true,
 }));
-
-//add other middleware
+app.use(helmet())
+app.disable('x-powered-by')
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
-//start app 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => 
-  console.log(`App is listening on port ${port}.`)
-);
+app.listen(port, ()=> {});
 
-app.post('/upload-avatar', async (req, res) => {
+app.post('/upload-file', async (req, res) => {
     try {
         if(!req.files) {
             res.send({
@@ -32,10 +32,7 @@ app.post('/upload-avatar', async (req, res) => {
                 message: 'No file uploaded'
             });
         } else {
-            //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
             let avatar = req.files.avatar;
-            
-            //Use the mv() method to place the file in upload directory (i.e. "uploads")
             avatar.mv('./uploads/' + avatar.name);
 
             //send response
