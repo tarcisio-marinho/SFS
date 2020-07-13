@@ -1,7 +1,0 @@
-rotas basicas da aplicação
-
-INFO: GET /:ID -> retorna se o arquivo existe e quantos dias faltam para ele ser deletado
-
-UPLOAD: POST /file + senha -> faz o upload do arquivo para o servidor, o server vai retornar a url gerada para download do arquivo e o tempo restante para o arquivo ser deletado
-
-DOWNLOAD: POST /:ID + SENHA -> tenta baixar o arquivo, envia a senha, o servidor checa a senha, caso correta, retorna o arquivo, caso não, erro
