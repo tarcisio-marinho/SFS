@@ -21,11 +21,12 @@ const App = () => {
   function chancevalue(acpf) {
     
     if (acpf != null) {
-      fileToUp = acpf;
+     
     } else {
       fileToUp = null;
     }
   }
+  
 
   return (
     <div id="fundo-externo">
@@ -36,7 +37,7 @@ const App = () => {
           {/*Drop files*/}
 
           <div id="drop">
-            <img src="arquivo.png" width="60" height="40" />
+            {/*<img src="arquivo.png" width="60" height="40" />*/}
             <div id="textDrop" {...getRootProps()}>
               <input {...getInputProps()} />
               {!isDragActive && "Clique ou arraste um arquivo"}
@@ -45,8 +46,11 @@ const App = () => {
             <ul className="list-group mt-2">
               {acceptedFiles.map((acceptedFile) => (
                 <li>
+
                   {acceptedFile.name}
                   {chancevalue(acceptedFile)}
+                  
+                
                 </li>
               ))}
             </ul>

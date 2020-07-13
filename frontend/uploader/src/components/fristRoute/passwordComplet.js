@@ -3494,7 +3494,7 @@ const Passwd = () => {
     return passwd;
   }
   function chancevalue(){
-    console.log(psw);
+ 
     if(ftp==null){
       psw = getFullPasswd();
     }else{
