@@ -9,24 +9,23 @@ using SFS.Services;
 
 namespace SFS.Controllers
 {
-    //[ApiController]
-    [Route("api/[controller]")]
-    public class FileController : ControllerBase
+    [Route("api/")]
+    public class SFSController : ControllerBase
     {
         private readonly FileService _fileService;
 
-        public FileController()
+        public SFSController()
         {
             _fileService = new FileService();
         }
 
         // download file(s) to client according path: rootDirectory/subDirectory with single zip file
         [HttpGet("Download/{subDirectory}")]
-        public IActionResult DownloadFiles(string subDirectory)
+        public async Task<IActionResult> DownloadFiles(string subDirectory)
         {
             try
             {
-                var (fileType, archiveData, archiveName) = _fileService.FetechFiles(subDirectory);
+                var (fileType, archiveData, archiveName) = await _fileService.FetchFiles(subDirectory);
 
                 return File(archiveData, fileType, archiveName);
             }
@@ -37,14 +36,14 @@ namespace SFS.Controllers
         }
 
         // upload file(s) to server that palce under path: rootDirectory/subDirectory
-        [HttpPost("upload")]
-        public IActionResult UploadFile([FromForm(Name = "files")] List<IFormFile> files, string subDirectory)
+        [HttpPost("Upload")]
+        public async Task<IActionResult> UploadFile([FromForm(Name = "file")] IFormFile file, string subDirectory)
         {
             try
             {
-                _fileService.SaveFile(files, subDirectory);
+                await _fileService.SaveFile(file, subDirectory);
 
-                return Ok(new { files.Count, Size = FileService.SizeConverter(files.Sum(f => f.Length)) });
+                return Ok(new { Count = 1, Size = FileService.SizeConverter(file.Length) });
             }
             catch (Exception exception)
             {

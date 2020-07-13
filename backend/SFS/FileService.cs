@@ -11,25 +11,23 @@ namespace SFS.Services
     public class FileService
     {
 
-        public void SaveFile(List<IFormFile> files, string subDirectory)
+        public async Task SaveFile(IFormFile file, string subDirectory)
         {
             subDirectory = subDirectory ?? string.Empty;
             var target = Path.Combine("C:\\Users\\tarcisio\\Projects\\", subDirectory);
 
             Directory.CreateDirectory(target);
 
-            files.ForEach(async file =>
+            
+            if (file.Length <= 0) return;
+            var filePath = Path.Combine(target, file.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                if (file.Length <= 0) return;
-                var filePath = Path.Combine(target, file.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-            });
+                await file.CopyToAsync(stream);
+            }
         }
 
-        public (string fileType, byte[] archiveData, string archiveName) FetechFiles(string subDirectory)
+        public async Task<(string fileType, byte[] archiveData, string archiveName)> FetchFiles(string subDirectory)
         {
             var zipName = $"archive-{DateTime.Now.ToString("yyyy_MM_dd-HH_mm_ss")}.zip";
 
