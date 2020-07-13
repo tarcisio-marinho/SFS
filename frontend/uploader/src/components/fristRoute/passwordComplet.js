@@ -1,5 +1,5 @@
-import ReactDOM, { unstable_batchedUpdates } from "react-dom";
-import React, { useCallback } from "react";
+
+import React from "react";
 import { ps, ftp } from "../../index.js";
 
 import "./style.css";

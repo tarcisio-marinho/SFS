@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { sha256, sha224 } from "js-sha256";
+//import { sha256, sha224 } from "js-sha256";
 import * as serviceWorker from "./serviceWorker";
 import { App, fileToUp } from "./components/fristRoute/index.js";
 import { Passwd, psw } from "./components/fristRoute/passwordComplet.js";
 import "./components/fristRoute/style.css";
-import { encrypt, decrypt } from "./components/fristRoute/encryptionService.js";
+//import { encrypt, decrypt } from "./components/fristRoute/encryptionService.js";
 //psw contem a senha
 //
 
@@ -41,7 +41,7 @@ function fileToByte(result) {
   reader.readAsArrayBuffer(result[0]);
 
   reader.onloadend = function (evt) {
-    if (evt.target.readyState == FileReader.DONE) {
+    if (evt.target.readyState === FileReader.DONE) {
       var arrayBuffer = evt.target.result,
         array = new Uint8Array(arrayBuffer);
       for (var i = 0; i < array.length; i++) {
