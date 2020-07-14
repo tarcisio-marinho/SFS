@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Api", "SFS\SFS.Api.csproj", "{C133D26D-A040-42E6-B6BE-CDD634F4713A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Api", "SFS.SFS\SFS.Api.csproj", "{C133D26D-A040-42E6-B6BE-CDD634F4713A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Application", "Application\SFS.Application.csproj", "{D3239923-A51E-4EF3-AD83-7145C11188D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Application", "SFS.Application\SFS.Application.csproj", "{D3239923-A51E-4EF3-AD83-7145C11188D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Domain", "Domain\SFS.Domain.csproj", "{340B15BD-788F-4CF3-96EC-983C3CB7246C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Domain", "SFS.Domain\SFS.Domain.csproj", "{340B15BD-788F-4CF3-96EC-983C3CB7246C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Infrastructure", "Infrastructure\SFS.Infrastructure.csproj", "{4726950E-4C32-4EBA-B653-6A1D31041E67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFS.Infrastructure", "SFS.Infrastructure\SFS.Infrastructure.csproj", "{4726950E-4C32-4EBA-B653-6A1D31041E67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
