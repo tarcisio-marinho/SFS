@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Boundaries.UploadFile
 {
-    interface IUploadFileUsecase
+    public interface IUploadFileUseCase : IUseCase<UploadFileInput>
     {
     }
 }

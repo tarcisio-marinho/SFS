@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Boundaries.UploadFile
 {
-    public interface IUploadFileOutputPorts : ISuccessOutputPort<ProcessOrderInvestigationResultInput>, IValidationErrorOutputPort<ProcessOrderInvestigationResultInput>
+    public interface IUploadFileOutputPorts : ISuccessOutputPort<UploadFileInput>, IValidationErrorOutputPort<UploadFileInput>
     {
     }
 }

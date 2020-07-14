@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Dtos.Errors;
+using Api.Dtos.Mvc;
+using Application.Boundaries.UploadFile;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,20 +22,18 @@ namespace Api.UseCases.UploadFile
         }
 
 
-        public Task PublishSuccessResultAsync(ProcessOrderInvestigationResultInput output)
+        public Task PublishSuccessResultAsync(UploadFileOutput output)
         {
-            //TODO: gerar um objeto de retorno específico pra essa chamada... ou simples 204 resolve? Validar com o Marcelo Jr do VI se 204 pode.
-
-            _logger.LogInformation("Investigation sent to peer successfully: {@0}", output);
+            _logger.LogInformation($"UploadFile Success: {output}");
 
             ViewModel = new OkObjectResult(output);
 
             return Task.CompletedTask;
         }
 
-        public Task PublishValidationErrorsAsync(ProcessOrderInvestigationResultInput input, IEnumerable<string> errors)
+        public Task PublishValidationErrorsAsync(IEnumerable<string> errors)
         {
-            _logger.LogWarning("Failed to execute UseCase ProcessOrderInvestigationResult: CorrelationId: {0} Errors: {1}", input.CorrelationId, string.Join("|", errors));
+            _logger.LogWarning($"Failed to execute UseCase UploadFile | Errors: {string.Join("|", errors)}");
 
             ViewModel = new PreconditionFailedObjectResult(new ValidationError(errors));
 

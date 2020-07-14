@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Boundaries.UploadFile
 {
-    class UploadFileInput
+    public class UploadFileInput
     {
         public UploadFileInput (IFormFile file, string hashpassword)
         {
