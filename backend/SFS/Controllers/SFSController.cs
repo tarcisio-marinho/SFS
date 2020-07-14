@@ -19,13 +19,12 @@ namespace SFS.Controllers
             _fileService = new FileService();
         }
 
-        // download file(s) to client according path: rootDirectory/subDirectory with single zip file
-        [HttpGet("Download/{subDirectory}")]
-        public async Task<IActionResult> DownloadFiles(string subDirectory)
+        [HttpGet("Download/")]
+        public async Task<IActionResult> DownloadFiles(string identifier)
         {
             try
             {
-                var (fileType, archiveData, archiveName) = await _fileService.FetchFiles(subDirectory);
+                var (fileType, archiveData, archiveName) = await _fileService.FetchFiles(identifier);
 
                 return File(archiveData, fileType, archiveName);
             }
@@ -35,13 +34,12 @@ namespace SFS.Controllers
             }
         }
 
-        // upload file(s) to server that palce under path: rootDirectory/subDirectory
         [HttpPost("Upload")]
-        public async Task<IActionResult> UploadFile([FromForm(Name = "file")] IFormFile file, string subDirectory)
+        public async Task<IActionResult> UploadFile([FromForm(Name = "file")] IFormFile file, string hashPassword)
         {
             try
             {
-                await _fileService.SaveFile(file, subDirectory);
+                await _fileService.SaveFile(file, hashPassword);
 
                 return Ok(new { Count = 1, Size = FileService.SizeConverter(file.Length) });
             }
