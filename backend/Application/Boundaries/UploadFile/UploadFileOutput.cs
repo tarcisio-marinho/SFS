@@ -6,12 +6,14 @@ namespace Application.Boundaries.UploadFile
 {
     public class UploadFileOutput
     {
-        public UploadFileOutput(bool success, DateTime expirationDate)
+        public UploadFileOutput(bool success, DateTime expirationDate, string identificator)
         {
             Success = success;
+            Identificator = identificator;
             ExpirationDate = expirationDate;
         }
-        public bool Success { get; set; }
-        public DateTime ExpirationDate { get; set; }
+        public bool Success { get; }
+        public string Identificator { get; }
+        public DateTime ExpirationDate { get; }
     }
 }
