@@ -1,19 +1,26 @@
+//Imports
+  //react
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-//import { sha256, sha224 } from "js-sha256";
 import * as serviceWorker from "./serviceWorker";
-import { App, fileToUp } from "./components/fristRoute/index.js";
-import { Passwd, psw } from "./components/fristRoute/passwordComplet.js";
-import "./components/fristRoute/style.css";
-//import { encrypt, decrypt } from "./components/fristRoute/encryptionService.js";
-//psw contem a senha
-//
+  //elements
+import { App, fileToUp } from "./FirstRoute/components/index.js";
+import { Passwd, psw } from "./FirstRoute/components/passwordGenerationService.js";
+  //style
+import "./index.css";
+import "./FirstRoute/components/style.css";
+  //security
+import { sha256 } from "js-sha256";
+import { encrypt, decrypt } from "./FirstRoute/utils/encryptionService";
 
+//Variables and updates
 var ps = psw;
-var ftp = File;
-ftp = fileToUp;
-function Updater() {
+var ftp = fileToUp;
+var int = setInterval(updateElements, 400);
+
+//functions
+//updateElements => while Passwd must to change
+function updateElements() {
   if (fileToUp == null) {
     const element = (
       <div>
@@ -27,14 +34,15 @@ function Updater() {
       <div>
         <App />
         <div id="ps">{psw}</div>
+        {clearInterval(int)}
         {fileToByte(fileToUp)}
       </div>
     );
     ReactDOM.render(element, document.getElementById("root"));
   }
 }
-setInterval(Updater, 400);
 
+//fileToByte => Transform file to byte array
 function fileToByte(result) {
   var reader = new FileReader();
   var fileByteArray = [];
@@ -47,15 +55,16 @@ function fileToByte(result) {
       for (var i = 0; i < array.length; i++) {
         fileByteArray.push(array[i]);
       }
-      //console.log(sha256(psw));
-      //console.log(fileByteArray);
-      //console.log(encrypt(fileByteArray, sha256(psw)));
+      let shaPassword = sha256(psw);
+      let encrypted = encrypt(fileByteArray, shaPassword);
+      let decrypted = decrypt(encrypted, shaPassword);
+      console.log(decrypted);
     }
   };
 }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+//System
 serviceWorker.register();
+
+//exports
 export { ps, ftp };

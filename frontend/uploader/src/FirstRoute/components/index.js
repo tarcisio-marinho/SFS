@@ -33,33 +33,35 @@ const App = () => {
       <div id="card">
         {/*Drop files*/}
 
-        <div id="image"></div>
         <div id="drop">
           {/*<img src="arquivo.png" width="60" height="40" />*/}
           <div id="textDrop" {...getRootProps()}>
             <input {...getInputProps()} />
             {!isDragActive && "Clique ou arraste um arquivo"}
             {isDragActive && "Já pode soltar ¯\\_(ツ)_/¯"}
+            <div id="image"></div>
           </div>
           <ul className="list-group mt-2">
             {acceptedFiles.map((acceptedFile) => (
               <div id="chanceFileName" key={acceptedFile.toString()}>
                 {acceptedFile.name}
                 {chancevalue(acceptedFile)}
+                
               </div>
             ))}
           </ul>
-        </div>
 
-        {/*Button upload*/}
-        <div id="upload">
-          <button id="button">
-            upload{/*mandar o acceptedFile para o backend*/}
-          </button>
+          
+          {/*Button upload*/}
         </div>
+        
+        <button id="button">
+          upload{/*todo => quando clicado chamar callbackend de mock*/}
+        </button>
       </div>
     </div>
   );
 };
+
 
 export { App, fileToUp };

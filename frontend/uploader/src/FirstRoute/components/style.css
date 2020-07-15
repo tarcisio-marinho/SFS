@@ -1,0 +1,108 @@
+#fundo-externo {
+    width: 100%;
+    height: 100%;
+    background: #282c34;
+    position: fixed;
+    box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
+}
+
+#main-header {
+    background: #282c34;
+    display: flex;
+    justify-content: center;
+    font-size: calc(2px + 4vmin);
+    color: white;
+    font-family: courier, arial, helvetica;
+    padding: 10px 2%;
+}
+
+#card {
+    position: absolute;
+    left: calc(200px + (50% - 24rem) / 2);
+    width: 50%;
+    height: 65%;
+    box-shadow: -5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+#drop {
+    left: calc(200px + (50% - 25rem) / 2);
+    width: 50%;
+    height: 50%;
+    border: dotted #282c34 1px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    background-size: contain;
+    position: relative;
+    margin-top: 10px;
+}
+
+#textDrop {
+    margin-top: 10px;
+    top: 0px;
+    left: calc(200px + (100% - auto) / 2);
+    width: 100%;
+    height: 100%;
+    font-family: courier, arial, helvetica;
+    font-size: calc(3px + 2vmin);
+}
+
+#image {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 25%;
+    height: 25%;
+    background: #ffffff url('../../FirstRoute/images/arquivo.png') no-repeat left bottom;
+    filter: opacity(80%);
+    background-size: contain;
+}
+
+#ps {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 500px;
+    top: 350px;
+    width: 25%;
+    height: 15%;
+    text-align: center;
+    background: #fff;
+    border-radius: 20px;
+    font-family: courier, arial, helvetica;
+    font-size: calc(5px + 2vmin);
+}
+
+div#chanceFileName {
+    position: relative;
+    top: 30px;
+    left: 0px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    background: #ffffff;
+    align-items: center;
+    border: solid 0px;
+    border-radius: 20px;
+}
+
+#button {
+    background-color: #bbbbbb;
+    text-transform: uppercase;
+    border: none;
+    font-family: courier, arial, helvetica;
+    font-size: calc(1px + 2vmin);
+    border-radius: 10px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
+    width: 20%;
+    height: 20%;
+    justify-content: center;
+    background-size: contain;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 85px;
+    left: 50px;
+    top: 70px;
+}
