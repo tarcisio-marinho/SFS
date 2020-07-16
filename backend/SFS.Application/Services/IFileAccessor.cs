@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 
 namespace SFS.Application.Services
 {
-    public interface IDataAccessor
+    public interface IFileAccessor
     {
-        Task<bool> CheckIfIdentificatorExists(string identificator);
+        Task<bool> WriteFileToDiskAsync(StoredFile file);
     }
 }

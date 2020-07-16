@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\SFS.Application.csproj" />
+    <ProjectReference Include="..\SFS.Application\SFS.Application.csproj" />
   </ItemGroup>
 
 

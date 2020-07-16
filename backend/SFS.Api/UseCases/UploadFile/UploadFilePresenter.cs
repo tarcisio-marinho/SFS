@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Api.UseCases.UploadFile
 {
-    public class UploadFilePresenter
+    public class UploadFilePresenter : IUploadFileOutputPorts
     {
 
         private readonly ILogger _logger;
@@ -22,7 +22,7 @@ namespace Api.UseCases.UploadFile
         }
 
 
-        public Task PublishSuccessResultAsync(UploadFileOutput output)
+        public Task PublishSuccessResultAsync(UploadFileInput output)
         {
             _logger.LogInformation($"UploadFile Success: {output}");
 
@@ -31,9 +31,18 @@ namespace Api.UseCases.UploadFile
             return Task.CompletedTask;
         }
 
-        public Task PublishValidationErrorsAsync(IEnumerable<string> errors)
+        public Task PublishValidationErrorsAsync(UploadFileInput input, IEnumerable<string> errors)
         {
             _logger.LogWarning($"Failed to execute UseCase UploadFile | Errors: {string.Join("|", errors)}");
+
+            ViewModel = new PreconditionFailedObjectResult(new ValidationError(errors));
+
+            return Task.CompletedTask;
+        }
+
+        public Task PublishApplicationErrorAsync(UploadFileOutput output)
+        {
+            _logger.LogWarning($"Failed to execute UseCase UploadFile");
 
             ViewModel = new PreconditionFailedObjectResult(new ValidationError(errors));
 

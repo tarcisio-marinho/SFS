@@ -19,8 +19,8 @@ namespace Application.Boundaries.UploadFile
 
             RuleFor(i => i.File.Length)
                 .NotNull()
-                .LessThanOrEqualTo(500 * 1024 * 1024)
-                .WithMessage("File size is larger than 500MB");
+                .LessThanOrEqualTo(100 * 1024 * 1024)
+                .WithMessage("File size is larger than 100MB");
         }
     }
 }

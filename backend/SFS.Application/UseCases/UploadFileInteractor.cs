@@ -1,5 +1,7 @@
 ﻿using Application.Boundaries.UploadFile;
+using Domain;
 using FluentValidation;
+using SFS.Application.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,14 +14,20 @@ namespace Application.UseCases
     public class UploadFileInteractor : IUploadFileUseCase
     {
         private readonly IValidator<UploadFileInput> validator;
-        private readonly IUploadFileOutputPorts UploadFileOutputPorts;
+        private readonly IUploadFileOutputPorts uploadFileOutputPorts;
+        private readonly IDataAccessor storageAccessor;
+        private readonly IFileAccessor fileAccessor;
         private const string FilePath = "asdfsd";
 
         public UploadFileInteractor(IValidator<UploadFileInput> validator,
-            IUploadFileOutputPorts UploadFileOutputPorts)
+            IUploadFileOutputPorts uploadFileOutputPorts, 
+            IDataAccessor storageAccessor, 
+            IFileAccessor fileAccessor)
         {
             this.validator = validator ?? throw new ArgumentNullException(nameof(validator));
-            this.UploadFileOutputPorts = UploadFileOutputPorts ?? throw new ArgumentNullException(nameof(UploadFileOutputPorts));
+            this.uploadFileOutputPorts = uploadFileOutputPorts ?? throw new ArgumentNullException(nameof(uploadFileOutputPorts));
+            this.storageAccessor = storageAccessor ?? throw new ArgumentNullException(nameof(storageAccessor));
+            this.fileAccessor = fileAccessor ?? throw new ArgumentNullException(nameof(fileAccessor)); 
         }
 
         public async Task ExecuteAsync(UploadFileInput input)
@@ -27,49 +35,37 @@ namespace Application.UseCases
             var validationResult = await validator.ValidateAsync(input);
             if (!validationResult.IsValid)
             {
-                await UploadFileOutputPorts.PublishValidationErrorsAsync(input, validationResult.Errors.Select(e => e.ErrorMessage));
+                await uploadFileOutputPorts.PublishValidationErrorsAsync(input, validationResult.Errors.Select(e => e.ErrorMessage));
                 return;
             }
 
             // TODO: implement application logic
-            // Generate new identificator
-            // Check if identificator is unique
             // Store at the database -> filepath, identificator, StoredDate
             // Store file at the disk
             // Return
-            var identificator = this.GenerateIdentificator();
-            
-            using (var stream = new FileStream(FilePath, FileMode.Create))
-            {
-                await input.File.CopyToAsync(stream);
-            }
+            var identificator = await this.GenerateIdentificator();
 
-            await UploadFileOutputPorts.PublishSuccessResultAsync(input);
+            var storedFile = new StoredFile(input.File.FileName, identificator, input.File);
+            if(await fileAccessor.WriteFileToDiskAsync(storedFile))
+            {
+                await uploadFileOutputPorts.PublishSuccessResultAsync(input);
+            }
+            else
+            {
+                await uploadFileOutputPorts.PublishApplicationErrorAsync(new UploadFileOutput(false, null, null));
+            }
         }
 
-        private string GenerateIdentificator()
+        private async Task<string> GenerateIdentificator()
         {
             var identificator = string.Empty;
             do
             {
-
                 identificator = Guid.NewGuid().ToString().Split('-')[4].ToUpper();
             }
-            while (this.CheckIfIdentificatorExists(identificator)); 
+            while (await storageAccessor.CheckIfIdentificatorExists(identificator)); 
             
             return identificator;
-        }
-
-        private bool CheckIfIdentificatorExists(string identificator)
-        {
-            if (true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }
