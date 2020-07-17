@@ -8,6 +8,6 @@ namespace SFS.Application.Boundaries
 {
     public interface IApplicationErrorOutputPort<TInput> where TInput : class
     {
-        Task PublishApplicationErrorAsync(UploadFileOutput output);
+        Task PublishApplicationErrorAsync(UploadFileError output);
     }
 }

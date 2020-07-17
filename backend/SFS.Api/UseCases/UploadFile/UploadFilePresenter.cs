@@ -3,6 +3,8 @@ using Api.Dtos.Mvc;
 using Application.Boundaries.UploadFile;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SFS.Api.Dtos.Errors;
+using SFS.Application.Boundaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace Api.UseCases.UploadFile
         }
 
 
-        public Task PublishSuccessResultAsync(UploadFileInput output)
+        public Task PublishSuccessResultAsync(UploadFileOutput output)
         {
             _logger.LogInformation($"UploadFile Success: {output}");
 
@@ -31,7 +33,7 @@ namespace Api.UseCases.UploadFile
             return Task.CompletedTask;
         }
 
-        public Task PublishValidationErrorsAsync(UploadFileInput input, IEnumerable<string> errors)
+        public Task PublishValidationErrorsAsync(IEnumerable<string> errors)
         {
             _logger.LogWarning($"Failed to execute UseCase UploadFile | Errors: {string.Join("|", errors)}");
 
@@ -40,11 +42,11 @@ namespace Api.UseCases.UploadFile
             return Task.CompletedTask;
         }
 
-        public Task PublishApplicationErrorAsync(UploadFileOutput output)
+        public Task PublishApplicationErrorAsync(UploadFileError errors)
         {
             _logger.LogWarning($"Failed to execute UseCase UploadFile");
 
-            ViewModel = new PreconditionFailedObjectResult(new ValidationError(errors));
+            ViewModel = new PreconditionFailedObjectResult(new ApplicationError(errors.Message));
 
             return Task.CompletedTask;
         }

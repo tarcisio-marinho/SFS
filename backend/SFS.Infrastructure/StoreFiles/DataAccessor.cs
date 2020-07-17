@@ -1,4 +1,5 @@
-﻿using SFS.Application.Services;
+﻿using Domain;
+using SFS.Application.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,12 @@ namespace SFS.Infrastructure.StoreFiles
 {
     class DataAccessor : IDataAccessor
     {
-        public Task<bool> CheckIfIdentificatorExists(string identificator)
+        public async Task<bool> CheckIfIdentificatorExists(string identificator)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task StoreFile(StoredFile file)
         {
             throw new NotImplementedException();
         }
