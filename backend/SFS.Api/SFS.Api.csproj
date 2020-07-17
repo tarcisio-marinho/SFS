@@ -11,8 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Application\SFS.Application.csproj" />
     <ProjectReference Include="..\SFS.Application\SFS.Application.csproj" />
+    <ProjectReference Include="..\SFS.Domain\SFS.Domain.csproj" />
+    <ProjectReference Include="..\SFS.Infrastructure\SFS.Infrastructure.csproj" />
   </ItemGroup>
 
 

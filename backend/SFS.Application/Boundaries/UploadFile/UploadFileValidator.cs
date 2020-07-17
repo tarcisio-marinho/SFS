@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.Boundaries.UploadFile
 {
-    class UploadFileValidator : AbstractValidator<UploadFileInput>
+    public class UploadFileValidator : AbstractValidator<UploadFileInput>
     {
         public UploadFileValidator()
         {

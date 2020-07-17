@@ -8,7 +8,7 @@ namespace Api.UseCases.UploadFile
 {
     public class UploadFileResultRequest
     {
-        public IFormFile? File { get; }
+        public string? File { get; }
         public string HashPassword { get; }
     }
 }

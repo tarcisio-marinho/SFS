@@ -30,11 +30,11 @@ namespace Api.UseCases.UploadFile
         [ProducesResponseType(typeof(UploadFileInput), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationError), StatusCodes.Status412PreconditionFailed)]
         [ProducesResponseType(typeof(InternalServerError), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UploadFileAsync([FromForm(Name = "file")] UploadFileResultRequest uploadFileResultRequest)
+        public async Task<IActionResult> UploadFileAsync([FromForm(Name = "file")] IFormFile file, string hashPassword)
         {
-            _logger.LogInformation("Initializing UseCase UploadFileInput with payload:", uploadFileResultRequest);
+            _logger.LogInformation($"Initializing UseCase UploadFileInput with filename: {file.FileName} and password: {hashPassword}");
 
-            var input = new UploadFileInput(uploadFileResultRequest.File, uploadFileResultRequest.HashPassword);
+            var input = new UploadFileInput(file, hashPassword);
 
             await uploadFileUseCase.ExecuteAsync(input);
 
