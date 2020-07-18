@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Api.UseCases.UploadFile

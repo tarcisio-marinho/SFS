@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\SFS.Application.csproj" />
     <ProjectReference Include="..\SFS.Application\SFS.Application.csproj" />
     <ProjectReference Include="..\SFS.Domain\SFS.Domain.csproj" />
     <ProjectReference Include="..\SFS.Infrastructure\SFS.Infrastructure.csproj" />

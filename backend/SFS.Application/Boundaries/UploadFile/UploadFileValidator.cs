@@ -13,8 +13,8 @@ namespace Application.Boundaries.UploadFile
                     .NotEmpty()
                     .WithMessage($"The {nameof(UploadFileInput.File)} field is required.")
                     .Length(64)
-                    .WithMessage($"Hash password must be a SHA256.")
-                    .Matches("\b[A-Fa-f0-9]{64}\b")
+                    .WithMessage($"Hash password must be a size 64")
+                    .Matches("[A-Fa-f0-9]{64}")
                     .WithMessage("Hash password must be a SHA256.");
 
             RuleFor(i => i.File.Length)
