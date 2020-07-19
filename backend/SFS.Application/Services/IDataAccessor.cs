@@ -8,7 +8,10 @@ namespace SFS.Application.Services
 {
     public interface IDataAccessor
     {
-        Task<bool> CheckIfIdentificatorExists(string identificator);
+        Task<bool> CheckIfIdentificatorExists(string identifier);
         Task StoreFile(StoredFile file);
+        Task<IList<StoredFile>> GetAllFiles();
+        Task<string> GetFileName(string identifier);
+        Task<DateTime> GetDateTime(string identifier);
     }
 }

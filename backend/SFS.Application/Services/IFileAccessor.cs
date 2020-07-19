@@ -9,5 +9,6 @@ namespace SFS.Application.Services
     public interface IFileAccessor
     {
         Task<bool> WriteFileToDiskAsync(StoredFile file);
+        Task<bool> DeleteFileFromDisk(string fileName);
     }
 }
