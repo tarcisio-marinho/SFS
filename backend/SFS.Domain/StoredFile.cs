@@ -14,6 +14,7 @@ namespace Domain
             File = file;
             UploadDate = uploadDate;
         }
+        public int Id { get; set; }
         public string FileName { get; }
         public string Identifier { get; }
         public IFormFile File { get; }

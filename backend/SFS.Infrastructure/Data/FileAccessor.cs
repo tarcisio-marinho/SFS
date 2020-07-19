@@ -15,11 +15,9 @@ namespace SFS.Infrastructure.Data
             try
             {
                 // TODO: get path from config
-                var pathFromConfig = "/home/tasfdasfd/";
-                using (var stream = new FileStream(Path.Combine(new[] { pathFromConfig , file.FileName, file.Identifier}), FileMode.Create))
+                var pathFromConfig = "C:\\Users\\tarcisio\\Desktop\\store";
+                using (var stream = new FileStream(Path.Combine(new[] { pathFromConfig , file.FileName  + "-"+ file.Identifier}), FileMode.Create))
                 {
-                    // TODO: fire and forget ??
-                    //_ = file.File.CopyToAsync(stream);
                     await file.File.CopyToAsync(stream);
                 }
             }catch(Exception ex)

@@ -18,7 +18,7 @@ namespace Application.UseCases
         private readonly IUploadFileOutputPorts uploadFileOutputPorts;
         private readonly IDataAccessor dataAccessor;
         private readonly IFileAccessor fileAccessor;
-        private const string _applicationErrorMessage = "Try again latter";
+        private const string _applicationErrorMessage = "Try again later";
 
         public UploadFileInteractor(IValidator<UploadFileInput> validator,
             IUploadFileOutputPorts uploadFileOutputPorts, 
