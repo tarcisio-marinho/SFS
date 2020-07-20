@@ -39,6 +39,33 @@
     margin-top: 10px;
 }
 
+#but {
+    left: calc(200px + (50% - 25rem) / 2);
+    width: 50%;
+    height: 50%;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    background-size: contain;
+    position: relative;
+    margin-top: 10px;
+}
+
+#button {
+    background-color: #bbbbbb;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    margin-top: 80px;
+    top: 0px;
+    left: calc(200px + (100% - auto) / 2);
+    width: 40%;
+    height: 40%;
+    font-family: courier, arial, helvetica;
+    font-size: calc(3px + 2vmin);
+}
+
 #textDrop {
     margin-top: 10px;
     top: 0px;
@@ -55,7 +82,7 @@
     margin: 0 auto;
     width: 25%;
     height: 25%;
-    background: #ffffff url('../../FirstRoute/images/arquivo.png') no-repeat left bottom;
+    background: #ffffff url('../../Routs/images/arquivo.png') no-repeat left bottom;
     filter: opacity(80%);
     background-size: contain;
 }
@@ -65,9 +92,10 @@
     justify-content: center;
     position: relative;
     left: 500px;
-    top: 350px;
+    top: -calc(200px + (100% - auto) / 2);
     width: 25%;
     height: 15%;
+    margin-top: auto;
     text-align: center;
     background: #fff;
     border-radius: 20px;
@@ -86,23 +114,4 @@ div#chanceFileName {
     align-items: center;
     border: solid 0px;
     border-radius: 20px;
-}
-
-#button {
-    background-color: #bbbbbb;
-    text-transform: uppercase;
-    border: none;
-    font-family: courier, arial, helvetica;
-    font-size: calc(1px + 2vmin);
-    border-radius: 10px;
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
-    width: 20%;
-    height: 20%;
-    justify-content: center;
-    background-size: contain;
-    position: relative;
-    margin-top: 20px;
-    margin-left: 85px;
-    left: 50px;
-    top: 70px;
 }

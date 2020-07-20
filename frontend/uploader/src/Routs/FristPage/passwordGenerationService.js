@@ -1,11 +1,11 @@
-
 import React from "react";
-import { ps, ftp } from "../../index.js";
 import wordlist from "../utils/wordList.js";
-
 import "./style.css";
-var psw = ps;
-const Passwd = () => {
+import { fileToUp } from "./homeRouter.js";
+
+var psw;
+
+function Passwd ()  {
   function getWord() {
     let pos0 = String(getRndInteger(1, 5));
     let pos1 = String(getRndInteger(0, 6));
@@ -38,18 +38,13 @@ const Passwd = () => {
     passwd = passwd.substring(0, passwd.length - 1);
     return passwd;
   }
-  function chancevalue(){
- 
-    if(ftp==null){
+  function chancevalue() {
+    if (fileToUp == null) {
       psw = getFullPasswd();
-    }else{
-      psw=ps;
     }
-  
   }
-  
-  return <div id="ps">{chancevalue()}{psw}</div>;
-  
+  chancevalue()
+  return psw
 };
 
 export { Passwd, psw };

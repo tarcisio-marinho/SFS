@@ -1,21 +1,27 @@
 //Imports
-  //react
+//react
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-  //elements
-import { App, fileToUp } from "./FirstRoute/components/index.js";
-import { Passwd, psw } from "./FirstRoute/components/passwordGenerationService.js";
-  //style
+//elements
+import { fileToUp, Home, status } from "./Routs/FristPage/homeRouter.js";
+import {
+  psw,
+  Passwd,
+} from "./Routs/FristPage/passwordGenerationService.js";
+import { sucess } from "./Routs/SecondPage/sucessPage.js";
+//style
 import "./index.css";
-import "./FirstRoute/components/style.css";
-  //security
+import "./Routs/FristPage/style.css";
+//security
 import { sha256 } from "js-sha256";
-import { encrypt, decrypt } from "./FirstRoute/utils/encryptionService";
+import { encrypt, decrypt } from "./Routs/utils/encryptionService";
+import { ErrorRt } from "./Routs/FristPage/erroRouter";
+import { download } from "./Routs/ThirdPage/downloadPage";
 
 //Variables and updates
-var ps = psw;
-var ftp = fileToUp;
+
 var int = setInterval(updateElements, 400);
 
 //functions
@@ -23,23 +29,40 @@ var int = setInterval(updateElements, 400);
 function updateElements() {
   if (fileToUp == null) {
     const element = (
-      <div>
-        <App />
-        <Passwd />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/download" component={download} />
+          <Route path="/erro" component={ErrorRt} />
+          <Route path="/sucess" component={sucess} />
+
+          <Route path="/" component={Home} />
+        </Switch>
+      </BrowserRouter>
     );
     ReactDOM.render(element, document.getElementById("root"));
   } else {
     const element = (
       <div>
-        <App />
-        <div id="ps">{psw}</div>
-        {clearInterval(int)}
-        {fileToByte(fileToUp)}
+        <BrowserRouter>
+          <Switch>
+            <Route path="/download" component={download} />
+            <Route path="/erro" component={ErrorRt} />
+            <Route path="/sucess" component={sucess} />
+
+            <Route path="/" component={Home} />
+            {clearInterval(int)}
+          </Switch>
+        </BrowserRouter>
       </div>
     );
     ReactDOM.render(element, document.getElementById("root"));
   }
+
+  /*
+    
+  
+    ReactDOM.render(element, document.getElementById("root"));
+  }*/
 }
 
 //fileToByte => Transform file to byte array
@@ -65,6 +88,3 @@ function fileToByte(result) {
 
 //System
 serviceWorker.register();
-
-//exports
-export { ps, ftp };
