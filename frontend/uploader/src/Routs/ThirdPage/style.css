@@ -16,16 +16,6 @@
     padding: 10px 2%;
 }
 
-#main-heade {
-    background: #ffffff;
-    display: flex;
-    justify-content: center;
-    font-size: calc(2px + 4vmin);
-    color: white;
-    font-family: courier, arial, helvetica;
-    padding: 10px 2%;
-}
-
 #card {
     position: absolute;
     left: calc(200px + (50% - 24rem) / 2);

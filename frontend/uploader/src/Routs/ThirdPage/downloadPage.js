@@ -11,6 +11,7 @@ function download() {
         {/*Drop files*/}
 
         <div id="drop">
+          <textarea ></textarea>
           <p>insira a senha para biaxar o arquivo</p>
         </div>
         <div>
@@ -18,7 +19,7 @@ function download() {
         </div>
         <div>
           <p>insira a senha para download</p>
-          <button></button>
+          <button ></button>
         </div>
       </div>
     </div>

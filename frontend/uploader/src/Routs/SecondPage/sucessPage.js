@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { psw } from "../FristPage/passwordGenerationService";
-import { isPage } from "../FristPage/homeRouter";
+import { isPage, fileToUp } from "../FristPage/homeRouter";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 var a;
@@ -24,36 +24,35 @@ class sucess extends React.Component {
             {/*Drop files*/}
 
             <div id="drop" text-align="center">
-              <p>Arquivo cifrado e salvo</p>
+              <p>
+                Arquivo {`${fileToUp.name}`}
+                <br />
+                cifrado e salvo{" "}
+              </p>
             </div>
             <div id="main-header ">
-              <p>ulr</p>
+              <p>
+                ulr
+                <CopyToClipboard
+                  text="url"
+                  onCopy={() => this.setState({ copied: true })}
+                >
+                  <button>Copy Url</button>
+                </CopyToClipboard>
+              </p>
             </div>
             <div id="main-header ">
-              <p>{psw}</p>
+              <p>
+                {psw}
+                <CopyToClipboard
+                  text={psw}
+                  onCopy={() => this.setState({ copied: true })}
+                >
+                  <button>Copy Password</button>
+                </CopyToClipboard>
+              </p>
             </div>
             <div>
-              <textarea
-                value={psw}
-                onChange={({ target: { value } }) =>
-                  this.setState({ value, copied: false })
-                }
-              />
-
-              <CopyToClipboard
-                text={this.state.value}
-                onCopy={() => this.setState({ copied: true })}
-              >
-                <span></span>
-              </CopyToClipboard>
-
-              <CopyToClipboard
-                text={this.state.value}
-                onCopy={() => this.setState({ copied: true })}
-              >
-                <button>Copiar</button>
-              </CopyToClipboard>
-
               {this.state.copied ? (
                 <span style={{ color: "green" }}>copiado.</span>
               ) : null}

@@ -43,8 +43,8 @@ function Passwd ()  {
       psw = getFullPasswd();
     }
   }
-  chancevalue()
-  return psw
+  chancevalue();
+  return psw;
 };
 
 export { Passwd, psw };
