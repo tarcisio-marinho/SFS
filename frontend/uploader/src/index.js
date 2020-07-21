@@ -5,11 +5,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 //elements
-import { fileToUp, Home, status } from "./Routs/FristPage/homeRouter.js";
-import {
-  psw,
-  Passwd,
-} from "./Routs/FristPage/passwordGenerationService.js";
+import { fileToUp, Home } from "./Routs/FristPage/homeRouter.js";
+import { psw } from "./Routs/FristPage/passwordGenerationService.js";
 import { sucess } from "./Routs/SecondPage/sucessPage.js";
 //style
 import "./index.css";
@@ -17,8 +14,9 @@ import "./Routs/FristPage/style.css";
 //security
 import { sha256 } from "js-sha256";
 import { encrypt, decrypt } from "./Routs/utils/encryptionService";
-import { ErrorRt } from "./Routs/FristPage/erroRouter";
+
 import { download } from "./Routs/ThirdPage/downloadPage";
+import { ErrorRt } from "./Routs/ErroPage/erroRouter";
 
 //Variables and updates
 
@@ -34,7 +32,6 @@ function updateElements() {
           <Route path="/download" component={download} />
           <Route path="/erro" component={ErrorRt} />
           <Route path="/sucess" component={sucess} />
-
           <Route path="/" component={Home} />
         </Switch>
       </BrowserRouter>
@@ -43,14 +40,13 @@ function updateElements() {
   } else {
     const element = (
       <div>
+        {clearInterval(int)}
         <BrowserRouter>
           <Switch>
             <Route path="/download" component={download} />
             <Route path="/erro" component={ErrorRt} />
             <Route path="/sucess" component={sucess} />
-
             <Route path="/" component={Home} />
-            {clearInterval(int)}
           </Switch>
         </BrowserRouter>
       </div>

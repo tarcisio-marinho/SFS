@@ -7,7 +7,7 @@ import "./style.css";
 
 //variables
 //--rotation for password
-var fileToUp;
+var fileToUp,expireDate,isPage=false;
 var showPasswd, intervalPassw;
 showPasswd = Passwd();
 intervalPassw = setInterval(updatePsw, 400);
@@ -23,13 +23,14 @@ function Home() {
     fileToUp = event[0];
   };
   const uploadFile = () => {
+    isPage=true;
     const formData = new FormData();
     formData.append("file", fileToUp);
     fetch("http://localhost:3001/upload", {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.status)
+      .then((response) => response.status)//expireDate=response.data
       .then((result) => isError(result))
       .catch((error) => console.log(error));
   };
@@ -80,4 +81,4 @@ function Home() {
 }
 
 //exports
-export { Home, fileToUp };
+export { Home, fileToUp,isPage };
