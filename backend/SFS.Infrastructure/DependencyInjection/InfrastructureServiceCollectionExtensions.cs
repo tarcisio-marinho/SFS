@@ -15,8 +15,8 @@ namespace SFS.Infrastructure.DependencyInjection
             if (services == null)
                 throw new ArgumentNullException(nameof(services));
 
-            services.AddScoped<IDataAccessor, DataAccessor>();
-            services.AddScoped<IFileAccessor, FileAccessor>();
+            services.AddScoped<IDataAccessor, DataAccessorMock>();
+            services.AddScoped<IFileAccessor, FileAccessorMock>();
 
             return services;
         }

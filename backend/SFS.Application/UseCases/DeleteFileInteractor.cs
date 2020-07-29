@@ -31,6 +31,7 @@ namespace SFS.Application.UseCases
             {
                 if (MaximumDaysExceeded(f.UploadDate))
                 {
+                    dataAccessor.RemoveFile(f.Identifier);
                     fileAccessor.DeleteFileFromDisk(f.FileName);
                 }
             });

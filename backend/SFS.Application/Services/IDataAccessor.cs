@@ -12,6 +12,8 @@ namespace SFS.Application.Services
         Task StoreFile(StoredFile file);
         Task<IList<StoredFile>> GetAllFiles();
         Task<string> GetFileName(string identifier);
+        Task<StoredFile> GetFileIfExists(string identifier);
         Task<DateTime> GetDateTime(string identifier);
+        Task RemoveFile(string identifier);
     }
 }

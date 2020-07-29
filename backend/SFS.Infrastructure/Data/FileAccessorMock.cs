@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SFS.Infrastructure.Data
 {
-    class FileAccessor : IFileAccessor
+    class FileAccessorMock : IFileAccessor
     {
         private string pathFromConfig = "C:\\Users\\tarcisio\\Desktop\\store";
         public async Task<bool> WriteFileToDiskAsync(StoredFile file)

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SFS.Application.Boundaries
 {
-    public interface IApplicationErrorOutputPort<TInput> where TInput : class
+    public interface IApplicationErrorOutputPort<TOutuput> where TOutuput : class
     {
-        Task PublishApplicationErrorAsync(UploadFileError output);
+        Task PublishApplicationErrorAsync(TOutuput output);
     }
 }

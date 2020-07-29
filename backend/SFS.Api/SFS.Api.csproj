@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Middleware\" />
     <Folder Include="UseCases\DownloadFile\" />
-    <Folder Include="UseCases\Info\" />
   </ItemGroup>
 
   <ItemGroup>

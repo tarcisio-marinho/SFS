@@ -4,6 +4,7 @@ using Npgsql;
 using SFS.Application.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -12,26 +13,32 @@ using System.Threading.Tasks;
 
 namespace SFS.Infrastructure.StoreFiles
 {
-    class DataAccessor : IDataAccessor
+    class DataAccessorMock : IDataAccessor
     {
         private IList<StoredFile> mock;
 
-        public DataAccessor()
+        public DataAccessorMock()
         {
             mock = new List<StoredFile>();
         }
         public async Task<bool> CheckIfIdentificatorExists(string identifier)
         {
-            bool contains = false;
-            mock.ToList().ForEach(e =>
+            var contains = false;
+            mock.ToList().ForEach(f =>
             {
-                if(e.Identifier == identifier)
+                if(f.Identifier == identifier)
                 {
                     contains = true;
                 }
             });
             return contains;
         }
+
+        public async Task<StoredFile> GetFileIfExists(string identifier)
+        {
+            return mock.ToList().Select(f => f).Where(f => f.Identifier == identifier).FirstOrDefault();
+        }
+
         public async Task StoreFile(StoredFile file)
         {
             mock.Add(file);
@@ -50,6 +57,11 @@ namespace SFS.Infrastructure.StoreFiles
         public async Task<string> GetFileName(string identifier)
         {
             return mock.ToList().Where(f => f.Identifier == identifier).Select(e => e.FileName).FirstOrDefault();
+        }
+
+        public async Task RemoveFile(string identifier)
+        {
+            mock.ToList().RemoveAll(f => f.Identifier == identifier);
         }
     }
 }
