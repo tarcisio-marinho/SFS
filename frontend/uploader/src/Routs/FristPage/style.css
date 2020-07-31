@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     background: #282c34;
-    position: fixed;
+    position: absolute;
     box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -23,7 +23,18 @@
     font-size: calc(2px + 4vmin);
     color: white;
     font-family: courier, arial, helvetica;
-    padding: 10px 2%;
+    padding: 20px 3%;
+}
+
+#main-head {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: -300px;
+    font-size: calc(2px + 4vmin);
+    color: white;
+    font-family: courier, arial, helvetica;
+    padding: 0px 3%;
 }
 
 #card {
@@ -49,17 +60,16 @@
     margin-top: 10px;
 }
 
-#but {
-    left: calc(200px + (50% - 25rem) / 2);
-    width: 50%;
-    height: 50%;
-    border: none;
-    border-radius: 10px;
-    text-align: center;
-    justify-content: center;
-    background-size: contain;
-    position: relative;
-    margin-top: 10px;
+#textDrop {
+    width: 270px;
+    height: 150px;
+    top: 0px;
+    left: 0px;
+    right: 10px;
+    position: absolute;
+    font-family: arial, Arial, Helvetica, sans-serif;
+    text-indent: center;
+    border-radius: 20px;
 }
 
 #button {
@@ -124,4 +134,42 @@ div#chanceFileName {
     align-items: center;
     border: solid 0px;
     border-radius: 20px;
+}
+
+#bt {
+    width: 50%;
+    height: 100%;
+    border: 0px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, .1);
+}
+
+#bt:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0px 2px 15px 0px rgb(0, 0, 0);
+    transition: all .25s ease;
+}
+
+#bt:hover:after {
+    transform: translate(0);
+}
+
+#btd {
+    width: 50%;
+    height: 100%;
+    border: 0px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.1);
+}
+
+#btd:hover {
+    transform: translate(0, -5px);
+    box-shadow: 0px 2px 15px 0px rgb(255, 255, 255);
+    transition: all .25s ease;
+}
+
+#btd:hover:after {
+    transform: translate(0);
 }

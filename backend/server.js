@@ -1,30 +1,46 @@
-const express = require('express');
-const fileUpload = require('express-fileupload');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const _ = require('lodash');
-var helmet = require('helmet')
-
+const fileUpload = require("express-fileupload");
+const cors = require("cors");
+const morgan = require("morgan");
+const _ = require("lodash");
+var helmet = require("helmet");
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 
 // TODO: Query database for inserted file
 
-app.use(fileUpload({
+app.use(
+  fileUpload({
     createParentPath: true,
-}));
-app.use(helmet())
-app.disable('x-powered-by')
+  })
+);
+app.use(helmet());
+app.disable("x-powered-by");
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, ()=> {});
-
-app.post('/upload-file', async (req, res) => {
+app.post("/upload", (req, res) => {
+  if (!req.files) {
+    return res.status(400).send({ msg: "file is not found" });
+  }
+  // accessing the file
+  const myFile = req.files.file;
+  //  mv() method places the file inside public directory
+  return res.json({
+    message: "File is uploaded",
+    status: 200,
+    date:"20/10/2000",
+    filename: myFile.name
+  });
+});
+app.post("/download", (req, res) => {
+ return res.send(req.body)
+});
+/*
+app.post('/api', async (req, res) => {
+   
     try {
         if(!req.files) {
             res.send({
@@ -33,7 +49,7 @@ app.post('/upload-file', async (req, res) => {
             });
         } else {
             let avatar = req.files.avatar;
-            avatar.mv('./uploads/' + avatar.name);
+            avatar.mv('./api/' + avatar.name);
 
             //send response
             res.send({
@@ -50,3 +66,8 @@ app.post('/upload-file', async (req, res) => {
         res.status(500).send(err);
     }
 });
+*/
+
+const port = 3001;
+
+app.listen(port, () => {});

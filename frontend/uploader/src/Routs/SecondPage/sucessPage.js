@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { psw } from "../FristPage/passwordGenerationService";
-import { isPage, fileToUp } from "../FristPage/homeRouter";
+import { isPage, fileToUp,url,expireDate } from "../FristPage/homeRouter";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 var a;
@@ -32,9 +32,10 @@ class sucess extends React.Component {
             </div>
             <div id="main-header ">
               <p>
-                ulr
+                {expireDate}
+                {url}
                 <CopyToClipboard
-                  text="url"
+                  text={url}
                   onCopy={() => this.setState({ copied: true })}
                 >
                   <button>Copy Url</button>

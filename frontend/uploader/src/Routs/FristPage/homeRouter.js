@@ -1,4 +1,5 @@
 //imports
+import ReactDOM from "react-dom";
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { useHistory } from "react-router-dom";
@@ -9,7 +10,9 @@ import "./style.css";
 //--rotation for password
 var fileToUp,
   expireDate,
-  isPage = false;
+  isPage = false,
+  url,
+  isErro = false;
 var showPasswd, intervalPassw;
 showPasswd = Passwd();
 intervalPassw = setInterval(updatePsw, 400);
@@ -18,89 +21,106 @@ function updatePsw() {
 }
 
 //navegation
-function navBar(history) {
-  const goToDownload = () => {
-    history.push("/download");
-  };
-  const goToHome = () => {
-    history.push("/");
-  };
-  return (
-    <div>
-      <nav id="main-heade">
-        <form class="form-inline">
-          <button onClick={goToHome}>Goto Home</button>
-          <button onClick={goToDownload}>Goto Download</button>
-        </form>
-      </nav>
-    </div>
-  );
-}
+
 //main element
 function Home() {
   const history = useHistory();
+  const goToDownload = () => {
+    history.push("/download");
+  };
+
   const handleChange = (event) => {
     clearInterval(intervalPassw);
     fileToUp = event[0];
   };
   const uploadFile = () => {
     isPage = true;
+    clearInterval(intervalPassw);
+
     const formData = new FormData();
     formData.append("file", fileToUp);
+
     fetch("http://localhost:3001/upload", {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.status) //expireDate=response.data
+      .then(function (response) {
+        response.json().then((data) => {
+          expireDate=data.date;
+          url="https://www.sfs.com/"+data.filename
+          console.log(expireDate)
+          console.log(url)
+        });
+
+        return response.status;
+      }) //expireDate=response.data
       .then((result) => isError(result))
       .catch((error) => console.log(error));
   };
   function isError(status) {
     if (status != 200) {
-      history.push("/erro");
+      isErro = true;
     } else {
       history.push("/sucess");
     }
   }
+  if (isErro == false) {
+    return (
+      <div>
+        <div id="fundo-externo">
+          <header id="main-header">
+            <h2>SFS</h2>
+            <button id="btd" onClick={goToDownload}>
+              Goto Download
+            </button>
+          </header>
 
-  return (
-    <div id="fundo-externo">
-      {navBar(history)}
-      <header id="main-header">
-        <h2>SFS</h2>
-      </header>
+          <div id="card">
+            <div id="drop">
+              {/*Drop files*/}
+              <div id="textDrop">
+                <Dropzone onDrop={handleChange}>
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <div {...getRootProps()}>
+                        <input {...getInputProps()} />
 
-      <div id="card">
-        <div id="drop">
-          {/*Drop files*/}
-          <Dropzone onDrop={handleChange}>
-            {({ getRootProps, getInputProps }) => (
-              <section>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
+                        {"Click e escolha um arquivo ou arraste-o"}
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
+              </div>
+            </div>
 
-                  <p>Click e escolha um arquivo ou arraste-o</p>
-                </div>
-              </section>
-            )}
-          </Dropzone>
-        </div>
+            <div id="ps">
+              {/*password*/}
+              {`${showPasswd}`}
+            </div>
 
-        <div id="ps">
-          {/*password*/}
-          {`${showPasswd}`}
-        </div>
-
-        <div id="but">
-          {/*Button upload*/}
-          <button onClick={uploadFile} id="button" type="submit">
-            Submit
-          </button>
+            <nav id="main-heade">
+              <button onClick={uploadFile} id="bt" type="submit">
+                Submit
+              </button>
+            </nav>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div id="fundo-externo">
+        <header id="main-header">
+          <h2>Erro</h2>
+        </header>
+        <div id="main-header">
+          <h4>não foi possivel realizar o upload</h4>
+        </div>
+        <div id="but"></div>
+      </div>
+    );
+  }
 }
 
 //exports
-export { Home, fileToUp, isPage };
+export { Home, fileToUp, isPage,expireDate,url };

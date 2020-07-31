@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 //elements
-import { fileToUp, Home } from "./Routs/FristPage/homeRouter.js";
+import { fileToUp, Home, isPage } from "./Routs/FristPage/homeRouter.js";
 import { psw } from "./Routs/FristPage/passwordGenerationService.js";
 import { sucess } from "./Routs/SecondPage/sucessPage.js";
 //style
@@ -16,7 +16,6 @@ import { sha256 } from "js-sha256";
 import { encrypt, decrypt } from "./Routs/utils/encryptionService";
 
 import { download } from "./Routs/ThirdPage/downloadPage";
-import { ErrorRt } from "./Routs/ErroPage/erroRouter";
 
 //Variables and updates
 
@@ -30,7 +29,6 @@ function updateElements() {
       <BrowserRouter>
         <Switch>
           <Route path="/download" component={download} />
-          <Route path="/erro" component={ErrorRt} />
           <Route path="/sucess" component={sucess} />
           <Route path="/" component={Home} />
         </Switch>
@@ -44,7 +42,7 @@ function updateElements() {
         <BrowserRouter>
           <Switch>
             <Route path="/download" component={download} />
-            <Route path="/erro" component={ErrorRt} />
+
             <Route path="/sucess" component={sucess} />
             <Route path="/" component={Home} />
           </Switch>
@@ -84,3 +82,5 @@ function fileToByte(result) {
 
 //System
 serviceWorker.register();
+
+export { int };
