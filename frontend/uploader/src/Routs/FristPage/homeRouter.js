@@ -5,6 +5,7 @@ import Dropzone from "react-dropzone";
 import { useHistory } from "react-router-dom";
 import { Passwd } from "./passwordGenerationService";
 import "./style.css";
+import DownloadLink from "react-download-link";
 
 //variables
 //--rotation for password
@@ -32,7 +33,24 @@ function Home() {
   const handleChange = (event) => {
     clearInterval(intervalPassw);
     fileToUp = event[0];
+    console.log(fileToUp.name);
+    console.log(fileToUp);
   };
+  function test() {
+    if (fileToUp != null) {
+      return (
+        <div>
+          <a
+            href={window.URL.createObjectURL(fileToUp)}
+            download={fileToUp.name}
+          >
+            asd
+          </a>
+        </div>
+      );
+    } else {
+    }
+  }
   const uploadFile = () => {
     isPage = true;
     clearInterval(intervalPassw);
@@ -46,10 +64,10 @@ function Home() {
     })
       .then(function (response) {
         response.json().then((data) => {
-          expireDate=data.date;
-          url="https://www.sfs.com/"+data.filename
-          console.log(expireDate)
-          console.log(url)
+          expireDate = data.date;
+          url = "https://www.sfs.com/" + data.filename;
+          console.log(expireDate);
+          console.log(url);
         });
 
         return response.status;
@@ -102,6 +120,7 @@ function Home() {
               <button onClick={uploadFile} id="bt" type="submit">
                 Submit
               </button>
+              {test()}
             </nav>
           </div>
         </div>
@@ -123,4 +142,4 @@ function Home() {
 }
 
 //exports
-export { Home, fileToUp, isPage,expireDate,url };
+export { Home, fileToUp, isPage, expireDate, url };

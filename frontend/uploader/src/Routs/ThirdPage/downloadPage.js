@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, useParams } from "react-router-dom";
 
-var senha, time, id;
+var senha, time, fileId, fileToDownload;
 function download() {
   const updatePassword = (e) => {
     senha = e.target.value;
@@ -9,72 +9,101 @@ function download() {
   const downloadFile = () => {
     const formData = new FormData();
     formData.append("string", senha);
-    formData.append("string", id);
+    formData.append("string", fileId);
 
     /*fetch("http://localhost:3001/download", {
       method: "POST",
       body: formData,
     })
       .then(function (response) {
+         response.json().then((data) => {
+        fileToDownload=data.file
+      });
         return response.status;
-      }) //expireDate=response.data
-      .catch((error) => console.log(error));*/
+      }).catch((error) => console.log(error));*/
   };
   function fileExistes() {
-    time = "17/12/2020";
     /*const formData = new FormData();
     formData.append("string", id);
 
-    fetch("http://localhost:3001/download/file/time", {
+    fetch("http://localhost:3001/exists", {
       method: "POST",
       body: formData,
     }).then(function (response) {
-       response.json().then((data) => {//pegar o time no response
-          
-        });
+      response.json().then((data) => {
+        time = data.time;
+      });
 
       return response.status;
-    }); //expireDate=response.data
-    */
+    });
+    if (time == undefined) {
+      return false;
+    } else {
+      return true;
+    }*/
     return false;
   }
-  if (fileExistes() === false) {
-    return <div>File doesn't exist</div>;
-  } else {
-    return (
-      <div id="fundo-externo">
-        <header id="main-header">
-          <h2>Download</h2>
-        </header>
-
-        <div id="card">
-          {/*Drop files*/}
-
-          <div id="drop">
-            <Switch>
-              <Route path="/:downlowad/:id" children={<CatchId />} />
-            </Switch>
-            <p>insira a senha para baixar o arquivo</p>
-            <input type="text" onInput={updatePassword} />
-
-            <button onClick={downloadFile}>Download</button>
-          </div>
-          <div>
-            <p>tempo restante: {time}</p>
-          </div>
+  function addingFile() {
+    if (fileToDownload != null) {
+      return (
+        <div>
+          <a
+            href={window.URL.createObjectURL(fileToDownload)}
+            download={fileToDownload.name}
+          >
+            asd
+          </a>
         </div>
+      );
+    } else {
+    }
+  }
+  if (fileId == null) {
+    //captura o id
+    return (
+      <div>
+        <Switch>
+          <Route path="/:downlowad/:id" children={<GetId />} />
+        </Switch>
       </div>
     );
+  } else {
+    if (fileExistes() === true) {
+      return <div>File doesn't exist</div>;
+    } else {
+      return (
+        <div id="fundo-externo">
+          <header id="main-header">
+            <h2>Download</h2>
+          </header>
+
+          <div id="card">
+            {/*Drop files*/}
+
+            <div id="drop">
+              <div>
+                <h3>arquivo: {fileId}</h3>
+              </div>
+              <p>insira a senha para baixar o arquivo</p>
+              <input type="text" onInput={updatePassword} />
+
+              <button onClick={downloadFile}>
+                Download {addingFile()}
+              </button>
+            </div>
+            <div>
+              <p>tempo restante: {time}</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
-function CatchId() {
-  id = useParams();
+function GetId() {
+  let { id } = useParams();
 
-  return (
-    <div>
-      <h3>Identificação do arquivo: {id}</h3>
-    </div>
-  );
+  return <div onLoadStart={(fileId = id)}></div>;
 }
 export { download };
