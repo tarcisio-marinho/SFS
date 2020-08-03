@@ -10,5 +10,6 @@ namespace SFS.Application.Services
     {
         Task<bool> WriteFileToDiskAsync(StoredFile file);
         Task<bool> DeleteFileFromDisk(string fileName);
+        Task<byte[]> GetFile(string fileName);
     }
 }

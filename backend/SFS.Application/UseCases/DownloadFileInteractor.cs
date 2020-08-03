@@ -37,7 +37,12 @@ namespace SFS.Application.UseCases
                 await _ports.PublishApplicationErrorAsync(new DownloadFileError("File doesnt exists or wrong password or it may be already deleted."));
             }
 
-            var file = _dataAccessor.GetFileIfExists(input.Identificator, input.HashPassword);
+            var storedFile = await _dataAccessor.GetFileIfExists(input.Identificator, input.HashPassword);
+
+            var file = await _fileAccessor.GetFile(storedFile.FileName);
+
+            // TODO: validate format application/zip
+            await _ports.PublishSuccessResultAsync(new DownloadFileOutput { File = file, FileName = storedFile.FileName, Format = "application/zip" });
         }
     }
 }
