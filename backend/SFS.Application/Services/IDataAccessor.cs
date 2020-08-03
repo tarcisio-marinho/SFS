@@ -15,5 +15,6 @@ namespace SFS.Application.Services
         Task<StoredFile> GetFileIfExists(string identifier);
         Task<DateTime> GetDateTime(string identifier);
         Task RemoveFile(string identifier);
+        Task<StoredFile> GetFileIfExists(string identifier, string hashPassword);
     }
 }

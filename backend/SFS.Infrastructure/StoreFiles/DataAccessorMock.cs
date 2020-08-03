@@ -63,5 +63,10 @@ namespace SFS.Infrastructure.StoreFiles
         {
             mock.ToList().RemoveAll(f => f.Identifier == identifier);
         }
+
+        public async Task<StoredFile> GetFileIfExists(string identifier, string hashPassword)
+        {
+            return mock.ToList().Select(file => file).Where(file => file.Identifier == identifier && file.HashPassword == hashPassword).FirstOrDefault();
+        }
     }
 }
