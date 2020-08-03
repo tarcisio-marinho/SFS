@@ -45,6 +45,7 @@ namespace SFS
             services.AddApiServices();
             services.AddInfrastructureServices();
             services.AddApplicationServices();
+            // TODO: add throttling -> https://stackoverflow.com/questions/20817300/how-to-throttle-requests-in-a-web-api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
