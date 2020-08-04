@@ -26,9 +26,6 @@ function updatePsw() {
 //main element
 function Home() {
   const history = useHistory();
-  const goToDownload = () => {
-    history.push("/download");
-  };
 
   const handleChange = (event) => {
     clearInterval(intervalPassw);
@@ -36,21 +33,7 @@ function Home() {
     console.log(fileToUp.name);
     console.log(fileToUp);
   };
-  function test() {
-    if (fileToUp != null) {
-      return (
-        <div>
-          <a
-            href={window.URL.createObjectURL(fileToUp)}
-            download={fileToUp.name}
-          >
-            asd
-          </a>
-        </div>
-      );
-    } else {
-    }
-  }
+
   const uploadFile = () => {
     isPage = true;
     clearInterval(intervalPassw);
@@ -84,19 +67,27 @@ function Home() {
   }
   if (isErro == false) {
     return (
-      <div>
-        <div id="fundo-externo">
-          <header id="main-header">
-            <h2>SFS</h2>
-            <button id="btd" onClick={goToDownload}>
-              Goto Download
-            </button>
-          </header>
+      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-center">
+        <header className="masthead mb-auto">
+          <div className="inner">
+            <h1 className="masthead-brand">SFS</h1>
 
-          <div id="card">
-            <div id="drop">
+            <nav className="nav nav-masthead justify-content-center">
+              <a className="nav-link active" href="/">
+                Home
+              </a>
+              <a className="nav-link" href="/download">
+                Download
+              </a>
+            </nav>
+          </div>
+        </header>
+        <main role="main" className="inner cover">
+          <h1 className="cover-heading">SFS your file</h1>
+          <p className="lead">
+            <div>
               {/*Drop files*/}
-              <div id="textDrop">
+              <div>
                 <Dropzone onDrop={handleChange}>
                   {({ getRootProps, getInputProps }) => (
                     <section>
@@ -110,20 +101,15 @@ function Home() {
                 </Dropzone>
               </div>
             </div>
+          </p>
 
-            <div id="ps">
-              {/*password*/}
-              {`${showPasswd}`}
-            </div>
-
-            <nav id="main-heade">
-              <button onClick={uploadFile} id="bt" type="submit">
-                Submit
-              </button>
-              {test()}
-            </nav>
+          <h3 className="lead">{`${showPasswd}`}</h3>
+          <div>
+            <button onClick={uploadFile} id="bt" type="submit">
+              Submit
+            </button>
           </div>
-        </div>
+        </main>
       </div>
     );
   } else {
